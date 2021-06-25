@@ -13,7 +13,7 @@ class CreateUserService {
 
   async execute({ name, email, password, admin = false }: IUserRequest) {
     const usersRepository = getCustomRepository(UsersRepositories)
-
+    
     if (!email) {
       throw new Error("Please, inform an email")
     }
@@ -21,7 +21,7 @@ class CreateUserService {
     const userAlreadyExists = await usersRepository.findOne({
       email,
     })
-
+    
     if (userAlreadyExists) {
       throw new Error("Email already in use")
     }
